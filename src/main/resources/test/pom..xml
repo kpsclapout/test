@@ -1,37 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>ear-packaging</artifactId>
+    <artifactId>ear-project</artifactId>
     <version>1.0.0</version>
-    <packaging>ear</packaging>
+    <packaging>ear</packaging>    <!-- Ensure this is set to ear -->
 
     <modules>
-        <module>../spring-boot-web/target/spring-boot-web-1.0.0.war</module>        <!-- Reference WAR file -->
+        <module>web-app</module>        <!-- Module for WAR -->
     </modules>
 
     <build>
         <plugins>
-            <!-- Maven EAR Plugin -->
+            <!-- EAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ear-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.0</version>                <!-- Ensure the plugin version is correct -->
                 <configuration>
-                    <generateApplicationXml>false</generateApplicationXml>
+                    <generateApplicationXml>true</generateApplicationXml>
                     <modules>
                         <webModule>
                             <groupId>com.example</groupId>
-                            <artifactId>spring-boot-web</artifactId>
+                            <artifactId>web-app</artifactId>
                             <contextRoot>/</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>
             </plugin>
+
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-</project>
 
+    <dependencies>
+        <!-- Add dependencies for your web app (e.g., Spring Boot) -->
+    </dependencies>
+
+</project>
